@@ -42,6 +42,8 @@ namespace OrleansNetCoreTest.Client
 
         private static async Task<IClusterClient> StartClientWithRetries(int initializeAttemptsBeforeFailing = 5)
         {
+            await Task.Delay(3000);
+
             int attempt = 0;
             IClusterClient client;
             while (true)

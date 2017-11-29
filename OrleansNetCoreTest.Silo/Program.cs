@@ -19,7 +19,7 @@ namespace OrleansNetCoreTest.Silo
             try
             {
                 var host = await StartSilo();
-                Console.WriteLine("\n\n\nHost started. Press Enter to terminate...");
+                Console.WriteLine("===========>>> Host started. Press Enter to terminate...");
                 Console.ReadLine();
 
                 await host.StopAsync();

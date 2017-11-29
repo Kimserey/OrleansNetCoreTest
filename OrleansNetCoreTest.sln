@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Grains",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Interfaces", "OrleansNetCoreTest.Interfaces\OrleansNetCoreTest.Interfaces.csproj", "{86D1FC11-51F2-486E-8672-7E7B38B04C2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Client", "OrleansNetCoreTest.Client\OrleansNetCoreTest.Client.csproj", "{A370F585-9859-4D79-BEF0-3C5FA69F41FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{86D1FC11-51F2-486E-8672-7E7B38B04C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D1FC11-51F2-486E-8672-7E7B38B04C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86D1FC11-51F2-486E-8672-7E7B38B04C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

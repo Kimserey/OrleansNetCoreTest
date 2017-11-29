@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Orleans.Hosting;
 using Orleans.Runtime.Configuration;
-using OrleansNetCoreTest.Grains;
+using OrleansNetCoreTest.UserGrains;
 using System;
 using System.Threading.Tasks;
 
-namespace OrleansNetCoreTest.Silo
+namespace OrleansNetCoreTest.UserSilo
 {
     class Program
     {
@@ -19,7 +19,7 @@ namespace OrleansNetCoreTest.Silo
             try
             {
                 var host = await StartSilo();
-                Console.WriteLine("===========>>> BankAccount Host started. Press Enter to terminate...");
+                Console.WriteLine("===========>>> UserAccount Host started. Press Enter to terminate...");
                 Console.ReadLine();
 
                 await host.StopAsync();
@@ -35,12 +35,12 @@ namespace OrleansNetCoreTest.Silo
 
         private static async Task<ISiloHost> StartSilo()
         {
-            var config = ClusterConfiguration.LocalhostPrimarySilo();
-            config.AddMemoryStorageProvider();
+            var config = new ClusterConfiguration();
+            config.StandardLoad();
 
             var builder = new SiloHostBuilder()
                 .UseConfiguration(config)
-                .AddApplicationPartsFromReferences(typeof(BankAccount).Assembly)
+                .AddApplicationPartsFromReferences(typeof(UserAccount).Assembly)
                 .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();

@@ -12,6 +12,9 @@ using Orleans;
 using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.Interfaces;
 using Orleans.Runtime;
+using Swashbuckle.AspNetCore.Swagger;
+using OrleansNetCoreTest.UserInterfaces;
+using System.Net;
 
 namespace OrleansNetCoreTest.Client
 {
@@ -28,6 +31,11 @@ namespace OrleansNetCoreTest.Client
         {
             services.AddMvc();
             services.AddSingleton<IGrainFactory>(StartClientWithRetries().Result);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("api-v1", new Info { Title = "API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -35,6 +43,11 @@ namespace OrleansNetCoreTest.Client
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/api-v1/swagger.json", "API v1");
+                });
             }
 
             app.UseMvc();
@@ -51,9 +64,12 @@ namespace OrleansNetCoreTest.Client
                 try
                 {
                     var config = ClientConfiguration.LocalhostSilo();
+                    config.Gateways.Add(new IPEndPoint(IPAddress.Loopback, 40001));
+
                     client = new ClientBuilder()
                         .UseConfiguration(config)
                         .AddApplicationPartsFromReferences(typeof(IBankAccount).Assembly)
+                        .AddApplicationPartsFromReferences(typeof(IUserAccount).Assembly)
                         .ConfigureLogging(logging => logging.AddConsole())
                         .Build();
 

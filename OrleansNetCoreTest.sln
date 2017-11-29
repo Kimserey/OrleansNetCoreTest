@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Silo", "OrleansNetCoreTest.Silo\OrleansNetCoreTest.Silo.csproj", "{58146AE4-5B0A-4D32-93FC-B49B420F2EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansNetCoreTest.Silo", "OrleansNetCoreTest.Silo\OrleansNetCoreTest.Silo.csproj", "{58146AE4-5B0A-4D32-93FC-B49B420F2EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Grains", "OrleansNetCoreTest.Grains\OrleansNetCoreTest.Grains.csproj", "{0DB63403-3FC9-4EE0-A660-FE200F69CB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansNetCoreTest.Grains", "OrleansNetCoreTest.Grains\OrleansNetCoreTest.Grains.csproj", "{0DB63403-3FC9-4EE0-A660-FE200F69CB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Interfaces", "OrleansNetCoreTest.Interfaces\OrleansNetCoreTest.Interfaces.csproj", "{86D1FC11-51F2-486E-8672-7E7B38B04C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansNetCoreTest.Interfaces", "OrleansNetCoreTest.Interfaces\OrleansNetCoreTest.Interfaces.csproj", "{86D1FC11-51F2-486E-8672-7E7B38B04C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.Client", "OrleansNetCoreTest.Client\OrleansNetCoreTest.Client.csproj", "{A370F585-9859-4D79-BEF0-3C5FA69F41FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansNetCoreTest.Client", "OrleansNetCoreTest.Client\OrleansNetCoreTest.Client.csproj", "{A370F585-9859-4D79-BEF0-3C5FA69F41FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.UserGrains", "OrleansNetCoreTest.UserGrains\OrleansNetCoreTest.UserGrains.csproj", "{3769FAF1-F6AB-43BA-B545-D35B232229DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.UserInterfaces", "OrleansNetCoreTest.UserInterfaces\OrleansNetCoreTest.UserInterfaces.csproj", "{EF2796B7-32C4-4FC6-BDEF-3D8FB127705B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansNetCoreTest.UserSilo", "OrleansNetCoreTest.UserSilo\OrleansNetCoreTest.UserSilo.csproj", "{FE298B44-1BFF-48B2-88C2-68261B1450B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A370F585-9859-4D79-BEF0-3C5FA69F41FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3769FAF1-F6AB-43BA-B545-D35B232229DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3769FAF1-F6AB-43BA-B545-D35B232229DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3769FAF1-F6AB-43BA-B545-D35B232229DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3769FAF1-F6AB-43BA-B545-D35B232229DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2796B7-32C4-4FC6-BDEF-3D8FB127705B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2796B7-32C4-4FC6-BDEF-3D8FB127705B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2796B7-32C4-4FC6-BDEF-3D8FB127705B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2796B7-32C4-4FC6-BDEF-3D8FB127705B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE298B44-1BFF-48B2-88C2-68261B1450B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE298B44-1BFF-48B2-88C2-68261B1450B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE298B44-1BFF-48B2-88C2-68261B1450B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE298B44-1BFF-48B2-88C2-68261B1450B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

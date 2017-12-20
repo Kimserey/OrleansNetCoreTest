@@ -38,11 +38,12 @@ namespace OrleansNetCoreTest.Silo
         {
             var config = ClusterConfiguration.LocalhostPrimarySilo();
             config.AddAzureBlobStorageProvider(providerName: "default", connectionString: "UseDevelopmentStorage=true", containerName: "bank-accounts");
+            config.AddSimpleMessageStreamProvider("transactions", true);
 
             var builder = new SiloHostBuilder()
-                .UseConfiguration(config)
-                .AddApplicationPartsFromReferences(typeof(BankAccount).Assembly)
-                .ConfigureLogging(logging => logging.AddConsole());
+             .UseConfiguration(config)
+             .AddApplicationPartsFromReferences(typeof(BankAccount).Assembly)
+             .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();
             await host.StartAsync();

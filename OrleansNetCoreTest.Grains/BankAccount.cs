@@ -6,23 +6,40 @@ using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Grains
 {
+
     [StorageProvider(ProviderName = "default")]
     public class BankAccount : Grain<BankAccountState>, IBankAccount
     {
 
-        public Task Deposit(double a)
+        public async Task Deposit(double a)
         {
             this.State.Balance += a;
-            return this.WriteStateAsync();
+            await this.WriteStateAsync();
+
+            var provider = base.GetStreamProvider("transactions");
+            var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
+            await stream.OnNextAsync(new TransactionEvent {
+                Amount = a,
+                Type = TransactionType.Credit
+            });
         }
 
-        public Task Withdraw(double a)
+        public async Task Withdraw(double a)
         {
             if (a > this.State.Balance)
                 throw new ValidationException("Balance cannot be inferior to zero.");
 
             this.State.Balance -= a;
-            return this.WriteStateAsync();
+            await this.WriteStateAsync();
+
+
+            var provider = base.GetStreamProvider("transactions");
+            var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
+            await stream.OnNextAsync(new TransactionEvent
+            {
+                Amount = a,
+                Type = TransactionType.Debit
+            });
         }
 
         public Task<double> GetBalance()

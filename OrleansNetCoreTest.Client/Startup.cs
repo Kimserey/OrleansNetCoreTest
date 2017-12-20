@@ -63,7 +63,6 @@ namespace OrleansNetCoreTest.Client
                 try
                 {
                     var config = ClientConfiguration.LocalhostSilo();
-                    config.Gateways.Add(new IPEndPoint(IPAddress.Loopback, 40001));
 
                     client = new ClientBuilder()
                         .UseConfiguration(config)

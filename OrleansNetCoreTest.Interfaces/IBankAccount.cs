@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Interfaces
 {
-    public interface IBankAccount : IGrainWithStringKey
+    public interface IBankAccount : IGrainWithGuidKey
     {
         Task Deposit(double a);
         Task Withdraw(double a);

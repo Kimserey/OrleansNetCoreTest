@@ -1,6 +1,8 @@
 ﻿using Orleans;
 using Orleans.Providers;
 using OrleansNetCoreTest.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -10,18 +12,25 @@ namespace OrleansNetCoreTest.Grains
     [StorageProvider(ProviderName = "default")]
     public class BankAccount : Grain<BankAccountState>, IBankAccount
     {
-
         public async Task Deposit(double a)
         {
             this.State.Balance += a;
             await this.WriteStateAsync();
 
-            var provider = base.GetStreamProvider("transactions");
-            var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
-            await stream.OnNextAsync(new TransactionEvent {
-                Amount = a,
-                Type = TransactionType.Credit
-            });
+            try
+            {
+                var provider = base.GetStreamProvider("transactions");
+                var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
+                await stream.OnNextAsync(new TransactionEvent
+                {
+                    Amount = a,
+                    Type = TransactionType.Credit
+                });
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         public async Task Withdraw(double a)

@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0" />
     <PackageReference Include="Microsoft.Orleans.Core" Version="2.0.0-beta1" />
+    <PackageReference Include="Microsoft.Orleans.OrleansAzureUtils" Version="2.0.0-beta1" />
     <PackageReference Include="Microsoft.Orleans.OrleansProviders" Version="2.0.0-beta1" />
     <PackageReference Include="Microsoft.Orleans.OrleansRuntime" Version="2.0.0-beta1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />

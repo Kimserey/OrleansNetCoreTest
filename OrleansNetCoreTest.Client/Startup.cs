@@ -13,7 +13,6 @@ using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.Interfaces;
 using Orleans.Runtime;
 using Swashbuckle.AspNetCore.Swagger;
-using OrleansNetCoreTest.UserInterfaces;
 using System.Net;
 
 namespace OrleansNetCoreTest.Client
@@ -69,7 +68,6 @@ namespace OrleansNetCoreTest.Client
                     client = new ClientBuilder()
                         .UseConfiguration(config)
                         .AddApplicationPartsFromReferences(typeof(IBankAccount).Assembly)
-                        .AddApplicationPartsFromReferences(typeof(IUserAccount).Assembly)
                         .ConfigureLogging(logging => logging.AddConsole())
                         .Build();
 

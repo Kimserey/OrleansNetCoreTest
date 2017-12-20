@@ -30,7 +30,7 @@ namespace OrleansNetCoreTest.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IGrainFactory>(StartClientWithRetries().Result);
+            services.AddSingleton<IGrainFactory>(x => StartClientWithRetries().Result);
 
             services.AddSwaggerGen(c =>
             {

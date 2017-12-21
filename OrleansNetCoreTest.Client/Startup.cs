@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Orleans;
+using Orleans.Runtime;
 using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.Interfaces;
-using Orleans.Runtime;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Net;
+using System;
+using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Client
 {
@@ -68,7 +64,6 @@ namespace OrleansNetCoreTest.Client
                 try
                 {
                     var config = ClientConfiguration.LocalhostSilo();
-
                     client = new ClientBuilder()
                         .UseConfiguration(config)
                         .ConfigureApplicationParts(x => x.AddApplicationPart(typeof(IBankAccount).Assembly).WithReferences())

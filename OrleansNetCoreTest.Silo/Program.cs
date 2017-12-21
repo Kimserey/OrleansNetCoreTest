@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
+using Orleans;
 using Orleans.Hosting;
 using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.Grains;
 using System;
 using System.Threading.Tasks;
-using Orleans;
 
 namespace OrleansNetCoreTest.Silo
 {

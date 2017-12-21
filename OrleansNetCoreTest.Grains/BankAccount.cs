@@ -1,4 +1,5 @@
-﻿using Orleans;
+﻿using Newtonsoft.Json;
+using Orleans;
 using Orleans.Providers;
 using Orleans.Streams;
 using OrleansNetCoreTest.Interfaces;
@@ -31,9 +32,7 @@ namespace OrleansNetCoreTest.Grains
             {
                 Amount = a,
                 Type = TransactionType.Credit,
-                Data = {
-                    { "key", "test" }
-                }
+                Data = new Dictionary<string, string> { { "key", "hello" } }
             });
         }
 

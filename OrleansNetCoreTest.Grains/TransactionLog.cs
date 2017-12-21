@@ -1,7 +1,9 @@
-﻿using Orleans;
+﻿using Newtonsoft.Json;
+using Orleans;
 using Orleans.Streams;
 using OrleansNetCoreTest.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Grains
@@ -27,6 +29,7 @@ namespace OrleansNetCoreTest.Grains
         public Task HandleCredit(TransactionEvent @event)
         {
             Console.WriteLine(" = = = >> Credited {0}", @event.Amount);
+            var x = @event.Data;
             return Task.CompletedTask;
         }
 

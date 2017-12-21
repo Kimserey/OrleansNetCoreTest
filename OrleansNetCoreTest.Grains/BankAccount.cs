@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Grains
 {
-    [StorageProvider(ProviderName = "default")]
+    [StorageProvider(ProviderName = "Default")]
     public class BankAccount : Grain<BankAccountState>, IBankAccount
     {
         public async Task Deposit(double a)
@@ -29,7 +29,7 @@ namespace OrleansNetCoreTest.Grains
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine(ex.Message);
             }
         }
 

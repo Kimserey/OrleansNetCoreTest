@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Orleans;
 using Orleans.Hosting;
 using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.UserGrains;
@@ -40,7 +41,7 @@ namespace OrleansNetCoreTest.UserSilo
 
             var builder = new SiloHostBuilder()
                 .UseConfiguration(config)
-                .AddApplicationPartsFromReferences(typeof(UserAccount).Assembly)
+                .ConfigureApplicationParts(x => x.AddApplicationPart(typeof(UserAccount).Assembly).WithReferences())
                 .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();

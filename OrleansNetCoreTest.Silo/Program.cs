@@ -4,7 +4,7 @@ using Orleans.Runtime.Configuration;
 using OrleansNetCoreTest.Grains;
 using System;
 using System.Threading.Tasks;
-using Orleans.Storage;
+using Orleans;
 
 namespace OrleansNetCoreTest.Silo
 {
@@ -37,12 +37,13 @@ namespace OrleansNetCoreTest.Silo
         private static async Task<ISiloHost> StartSilo()
         {
             var config = ClusterConfiguration.LocalhostPrimarySilo();
-            config.AddAzureBlobStorageProvider(providerName: "default", connectionString: "UseDevelopmentStorage=true", containerName: "bank-accounts");
+            config.AddAzureBlobStorageProvider(providerName: "Default", connectionString: "UseDevelopmentStorage=true", containerName: "bank-accounts");
+            config.AddAzureBlobStorageProvider(providerName: "PubSubStore", connectionString: "UseDevelopmentStorage=true", containerName: "pubsub-store");
             config.AddSimpleMessageStreamProvider("transactions", true);
 
             var builder = new SiloHostBuilder()
              .UseConfiguration(config)
-             .AddApplicationPartsFromReferences(typeof(BankAccount).Assembly)
+             .ConfigureApplicationParts(x => x.AddApplicationPart(typeof(BankAccount).Assembly).WithReferences())
              .ConfigureLogging(logging => logging.AddConsole());
 
             var host = builder.Build();

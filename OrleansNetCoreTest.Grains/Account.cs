@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Grains
 {
-    [StorageProvider(ProviderName = "default")]
+    [StorageProvider(ProviderName = "Default")]
     public class Account : Grain<AccountState>, IAccount
     {
         public async Task<Guid> CreateBankAccount()

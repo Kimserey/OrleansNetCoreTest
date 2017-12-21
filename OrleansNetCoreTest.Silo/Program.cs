@@ -37,9 +37,9 @@ namespace OrleansNetCoreTest.Silo
         private static async Task<ISiloHost> StartSilo()
         {
             var config = ClusterConfiguration.LocalhostPrimarySilo();
-            config.Globals.ClusterId = "expense-king";
+            config.Globals.ClusterId = "orleans-test";
             config.AddAzureBlobStorageProvider(providerName: "Default", connectionString: "UseDevelopmentStorage=true", containerName: "bank-accounts");
-            config.AddAzureBlobStorageProvider(providerName: "PubSubStore", connectionString: "UseDevelopmentStorage=true", containerName: "pubsub-store");
+            config.AddAzureBlobStorageProvider(providerName: "PubSubStore", connectionString: "UseDevelopmentStorage=true", containerName: "dev-pubsub-store");
             config.AddAzureQueueStreamProviderV2("transactions", connectionString: "UseDevelopmentStorage=true");
 
             var builder = new SiloHostBuilder()

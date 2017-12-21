@@ -30,7 +30,10 @@ namespace OrleansNetCoreTest.Grains
             await _stream.OnNextAsync(new TransactionEvent
             {
                 Amount = a,
-                Type = TransactionType.Credit
+                Type = TransactionType.Credit,
+                Data = {
+                    { "key", "test" }
+                }
             });
         }
 

@@ -13,12 +13,26 @@ namespace OrleansNetCoreTest.Grains
         {
             var streamProvider = GetStreamProvider("transactions");
             var stream = streamProvider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
-            await stream.SubscribeAsync<TransactionEvent>(OnNext);
+            await stream
+                .SubscribeAsync<TransactionEvent>(async (@event, token) => {
+                    switch (@event.Type)
+                    {
+                        case TransactionType.Credit: await HandleCredit(@event); break;
+                        case TransactionType.Debit: await HandleDebit(@event); break;
+                        default: throw new NotSupportedException();
+                    }
+                });
         }
 
-        private Task OnNext(TransactionEvent data, StreamSequenceToken token)
+        public Task HandleCredit(TransactionEvent @event)
         {
-            Console.WriteLine(" = = = >> Received {0}", data.Amount);
+            Console.WriteLine(" = = = >> Credited {0}", @event.Amount);
+            return Task.CompletedTask;
+        }
+
+        public Task HandleDebit(TransactionEvent @event)
+        {
+            Console.WriteLine(" = = = >> Debited {0}", @event.Amount);
             return Task.CompletedTask;
         }
     }

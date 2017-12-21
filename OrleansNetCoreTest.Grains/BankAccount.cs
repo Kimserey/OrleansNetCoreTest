@@ -1,5 +1,6 @@
 ﻿using Orleans;
 using Orleans.Providers;
+using Orleans.Streams;
 using OrleansNetCoreTest.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,25 @@ namespace OrleansNetCoreTest.Grains
     [StorageProvider(ProviderName = "Default")]
     public class BankAccount : Grain<BankAccountState>, IBankAccount
     {
+        private IAsyncStream<TransactionEvent> _stream;
+
+        public override Task OnActivateAsync()
+        {
+            var provider = base.GetStreamProvider("transactions");
+            _stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
+            return base.OnActivateAsync();
+        }
+
         public async Task Deposit(double a)
         {
             this.State.Balance += a;
             await this.WriteStateAsync();
 
-            try
+            await _stream.OnNextAsync(new TransactionEvent
             {
-                var provider = base.GetStreamProvider("transactions");
-                var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
-                await stream.OnNextAsync(new TransactionEvent
-                {
-                    Amount = a,
-                    Type = TransactionType.Credit
-                });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+                Amount = a,
+                Type = TransactionType.Credit
+            });
         }
 
         public async Task Withdraw(double a)
@@ -41,10 +42,7 @@ namespace OrleansNetCoreTest.Grains
             this.State.Balance -= a;
             await this.WriteStateAsync();
 
-
-            var provider = base.GetStreamProvider("transactions");
-            var stream = provider.GetStream<TransactionEvent>(this.GetPrimaryKey(), "transactions");
-            await stream.OnNextAsync(new TransactionEvent
+            await _stream.OnNextAsync(new TransactionEvent
             {
                 Amount = a,
                 Type = TransactionType.Debit

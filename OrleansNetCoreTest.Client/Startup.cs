@@ -17,6 +17,11 @@ using System.Net;
 
 namespace OrleansNetCoreTest.Client
 {
+
+    // To use Hererogeneous silos:
+    // 1. Add the application part targeting the IUserAccount library
+    // 2. Add the proxy gateway 40001 to the configuration
+    //
     public class Startup
     {
         public Startup(IConfiguration configuration)

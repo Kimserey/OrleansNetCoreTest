@@ -4,11 +4,11 @@ using OrleansNetCoreTest.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Grains
 {
-
     [StorageProvider(ProviderName = "default")]
     public class BankAccount : Grain<BankAccountState>, IBankAccount
     {
@@ -49,6 +49,11 @@ namespace OrleansNetCoreTest.Grains
                 Amount = a,
                 Type = TransactionType.Debit
             });
+        }
+
+        public Task<(Guid, double)> Get()
+        {
+            return Task.FromResult((this.GetPrimaryKey(), this.State.Balance));
         }
 
         public Task<double> GetBalance()

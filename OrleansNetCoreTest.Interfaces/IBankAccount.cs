@@ -1,4 +1,5 @@
 ﻿using Orleans;
+using System;
 using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Interfaces
@@ -8,5 +9,6 @@ namespace OrleansNetCoreTest.Interfaces
         Task Deposit(double a);
         Task Withdraw(double a);
         Task<double> GetBalance();
+        Task<(Guid, double)> Get();
     }
 }

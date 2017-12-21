@@ -2,6 +2,7 @@
 using Orleans;
 using OrleansNetCoreTest.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OrleansNetCoreTest.Client.Controllers
@@ -16,17 +17,37 @@ namespace OrleansNetCoreTest.Client.Controllers
             _factory = factory;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var bankAccounts = await Task.WhenAll(
+                (await _factory.GetGrain<IAccount>(0).GetBankAccounts())
+                    .Select(async b => await b.Get())
+            );
+
+            return Ok(bankAccounts);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create()
+        {
+            var id = await _factory.GetGrain<IAccount>(0).CreateBankAccount();
+            return Ok(id);
+        }
+
         [HttpPost("{bankAccountId}/deposit")]
         public async Task<IActionResult> Deposit(Guid bankAccountId, double value)
         {
-            await _factory.GetGrain<IBankAccount>(bankAccountId).Deposit(value);
+            var bankAccount = await _factory.GetGrain<IAccount>(0).Get(bankAccountId);
+            await bankAccount.Deposit(value);
             return NoContent();
         }
 
         [HttpPost("{bankAccountId}/withdraw")]
         public async Task<IActionResult> Withdraw(Guid bankAccountId, double value)
         {
-            await _factory.GetGrain<IBankAccount>(bankAccountId).Withdraw(value);
+            var bankAccount = await _factory.GetGrain<IAccount>(0).Get(bankAccountId);
+            await bankAccount.Withdraw(value);
             return NoContent();
         }
 

@@ -34,6 +34,6 @@ namespace OrleansNetCoreTest.Grains
 
     public class AccountState
     {
-        public List<IBankAccount> BankAccounts { get; set; }
+        public List<IBankAccount> BankAccounts { get; set; } = new List<IBankAccount>();
     }
 }
